@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {Layout, Menu, Breadcrumb} from 'antd';
+import {Layout, Menu, Breadcrumb} from 'antd'
+
 // import {UserOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons';
 import 'antd/dist/antd.css'
 import SideMenu from "./SideMenu";
@@ -9,6 +10,7 @@ import QnaAdd from "./qna/add/QnaAdd";
 import QnaView from "./qna/view/QnaView";
 import QnaEdit from "./qna/edit/QnaEdit";
 import QnaDelete from "./qna/del/QnaDelete";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const {Header, Content, Footer, Sider} = Layout;
 // const items1 = ['1', '2', '3'].map((key) => ({
@@ -35,16 +37,21 @@ const {Header, Content, Footer, Sider} = Layout;
 const Main = () => {
     let [page, setPage] = useState(<Context/>);
 
+    const location = useLocation();
+    console.log('state', location)
+    const {username} = location.state
+    let data = {name : username}
+
     const LoadPage = (pageNum, key) => {
         switch (pageNum) {
             case 1 :
                 setPage(<Context/>)
                 break;
             case 2:
-                setPage(<QNA loadPage={LoadPage}/>)
+                setPage(<QNA loadPage={LoadPage} data={key}/>)
                 break;
             case 3:
-                setPage(<QnaAdd loadPage={LoadPage}/>)
+                setPage(<QnaAdd loadPage={LoadPage} data={key}/>)
                 break;
             case 4:
                 setPage(<QnaView loadPage={LoadPage} data={key}/>)
@@ -77,7 +84,7 @@ const Main = () => {
 
                     }}
                 >
-                    <SideMenu LoadPage={LoadPage}/>
+                    <SideMenu LoadPage={LoadPage} data={data} username={username}/>
 
                     <Content
                         style={{

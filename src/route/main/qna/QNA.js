@@ -83,7 +83,7 @@ function QNA(props) {
                            },
                        }
                    }}/>
-            <Button onClick={event => props.loadPage(3)}>질문 등록하기</Button>
+            <Button onClick={event => props.loadPage(3, props.data)}>질문 등록하기</Button>
         </div>
     )
 }

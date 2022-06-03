@@ -16,6 +16,7 @@ function App() {
                     <Route path={"/"} element={<Home/>}/>
                     <Route path={"/signup"} element={<SignUp/>}/>
                     <Route path={"/main"} element={<Main/>}/>
+                    {/*<Route path={"/main"} render={(props => <Main {...props}/>)}/>*/}
                 </Routes>
             </BrowserRouter>
 
