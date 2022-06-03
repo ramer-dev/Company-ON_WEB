@@ -12,7 +12,7 @@ const QnaView = (props) => {
         <Divider/>
         <div>
             <div>
-                {props.paragraph}본문
+                {props.data.paragraph}본문
             </div>
             <Button>이 글이 도움돼요</Button>
             <Button onClick={event => props.loadPage(5, props.data)}>수정</Button>

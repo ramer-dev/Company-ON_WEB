@@ -21,7 +21,7 @@ const QnaAdd = (props) => {
             <div>제목 :
                 <Input type={"text"} onChange={titleChangeHandler} name={'title'}/>
             </div>
-            <div>{data.name}</div>
+            <div>{data}</div>
             <div>{now}</div>
         </div>
         <Divider/>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Layout, Menu, Breadcrumb} from 'antd'
 
 // import {UserOutlined, LaptopOutlined, NotificationOutlined} from '@ant-design/icons';
@@ -35,12 +35,31 @@ const {Header, Content, Footer, Sider} = Layout;
 
 
 const Main = () => {
-    let [page, setPage] = useState(<Context/>);
 
-    const location = useLocation();
-    console.log('state', location)
-    const {username} = location.state
-    let data = {name : username}
+
+    let [page, setPage] = useState(<Context/>);
+    const navigate = useNavigate();
+
+    // const location = useLocation()
+    let username;
+    let data;
+    const sessionStorage = window.sessionStorage;
+
+    data = sessionStorage.getItem('name');
+    // console.log('state', location)
+    // console.log(sessionStorage)
+    // if(typeof location.state.username !== undefined) {
+    //     username = location.state.username
+    //     data = {name: username}
+    // }
+    // useEffect(() => {
+        //
+        // if(typeof location.state.username !== undefined){
+        //     alert("잘못된 접근입니다.")
+        //     navigate('..')
+        // }
+        //
+        //     }, [])
 
     const LoadPage = (pageNum, key) => {
         switch (pageNum) {
@@ -74,6 +93,7 @@ const Main = () => {
             <Content
                 style={{
                     height: '100vh',
+                    width:'100%',
                     padding: '0 50px',
                 }}
             >
@@ -84,7 +104,7 @@ const Main = () => {
 
                     }}
                 >
-                    <SideMenu LoadPage={LoadPage} data={data} username={username}/>
+                    <SideMenu LoadPage={LoadPage} data={data}/>
 
                     <Content
                         style={{

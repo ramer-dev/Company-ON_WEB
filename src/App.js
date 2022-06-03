@@ -11,9 +11,9 @@ function App() {
     return (
         <div className="App">
 
-            <BrowserRouter>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <Routes>
-                    <Route path={"/"} element={<Home/>}/>
+                    <Route exact path={"/"} element={<Home/>}/>
                     <Route path={"/signup"} element={<SignUp/>}/>
                     <Route path={"/main"} element={<Main/>}/>
                     {/*<Route path={"/main"} render={(props => <Main {...props}/>)}/>*/}

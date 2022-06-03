@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {Table, Button, Modal} from "antd";
+import axios from "axios";
 
 const columns = [
     {
@@ -27,6 +28,7 @@ for (let i = 0; i < 46; i++) {
         key: i,
         title: `title${i}`,
         name: `Edward King ${i}`,
+        paragraph:`${i * i}`,
         date: 'yyyy.mm.dd',
         helped: `${i}`,
     });
@@ -36,11 +38,25 @@ function QNA(props) {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const loadAllQNA = () => {
+        axios.get("URL")
+            .then(res => {
+                data.push({
+                    key:res.id,
+                    title:res.title,
+                    name:res.name,
+                    date:res.date,
+                    helped:res.helped
+                })
+            })
+    }
+
     const start = () => {
         setLoading(true); // ajax request after empty completing
 
         setTimeout(() => {
             setSelectedRowKeys([]);
+            loadAllQNA()
             setLoading(false);
         }, 1000);
     };
@@ -62,7 +78,7 @@ function QNA(props) {
     const hasSelected = selectedRowKeys.length > 0;
 
     return (
-        <div style={{width:'800px'}}>
+        <div style={{minWidth:'400px', width:'800px'}}>
         {/*    <div*/}
         {/*        style={{marginBottom: 16,}}>*/}
         {/*        <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>*/}

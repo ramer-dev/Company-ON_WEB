@@ -2,12 +2,14 @@ import {Menu} from "antd";
 import React from "react";
 import Context from "./Context";
 import QNA from "./qna/QNA";
-
+import {useNavigate} from "react-router-dom";
 
 
 function SideMenu(props) {
+    const navigate = useNavigate();
+
     const items = [
-        {label: `${props.username} 님`, key: 'item-1',},
+        {label: `${props.data} 님`, key: 'item-1',},
         {
             label: 'Company-ON', key: 'stub 0',
             children: [
@@ -33,12 +35,20 @@ function SideMenu(props) {
     ];
 
     const onClick = (e) => {
-        console.log('click', e)
 
-        if (e.key === 'item-1-6') {
-            props.LoadPage(2, props.data)
-        } else {
-            props.LoadPage(1)
+        switch (e.key){
+            case 'item-1-6': // Q&A
+                props.LoadPage(2, props.data)
+                break;
+            case 'item-3': // Logout
+                const session = window.sessionStorage;
+                navigate('..');
+                alert(session.getItem("name")+ "님! \n" +
+                    "정상적으로 로그아웃 되셨습니다!")
+                session.clear();
+                break;
+            default:
+                props.LoadPage(1);
         }
     }
 
